@@ -53,17 +53,6 @@
     gap: 8px;
     margin-bottom: 40px;
   }
-  .palm-wrap {
-    width: 80px; height: 80px;
-    display: flex; align-items: center; justify-content: center;
-    filter: drop-shadow(0 0 18px var(--glow));
-    animation: palmBob 4s ease-in-out infinite;
-  }
-  .palm-wrap img { width: 100%; height: 100%; object-fit: contain; }
-  @keyframes palmBob {
-    0%,100% { transform: translateY(0) rotate(-3deg); }
-    50%      { transform: translateY(-8px) rotate(3deg); }
-  }
   h1 {
     font-size: clamp(1.6rem, 5vw, 2.8rem);
     font-weight: 700;
@@ -243,9 +232,6 @@
 
 <div class="page">
   <header>
-    <div class="palm-wrap">
-      <img src="Assets/palm.png" alt="" onerror="this.style.display='none'">
-    </div>
     <h1>GTA VI Text Generator</h1>
   </header>
 
@@ -507,6 +493,48 @@ async function doRender(){
       ctx.drawImage(cv, x, pad);
       x+=cv.width+gap;
     }
+
+    // ── palm overlay pass ──
+    // Stretch palm.png across the full text area, clip it through all
+    // letter masks combined, then blend over the gradient with 'screen'
+    // so colours stay vibrant and the palm texture glows through.
+    try {
+      const palmImg = await loadImg(`${BASE}palm.png`);
+
+      // 1. Build a combined mask canvas: draw every letter mask at its position
+      const maskCv  = document.createElement('canvas');
+      maskCv.width  = totalW; maskCv.height = totalH;
+      const mCtx    = maskCv.getContext('2d');
+      let mx = pad;
+      for(let i=0; i<supported.length; i++){
+        const c = supported[i];
+        if(c===' '){ mx+=spaceW+gap; continue; }
+        const maskImg = await loadImg(`${BASE}text/mask/mask${c}.png`);
+        const lw = letterCanvases[i] ? letterCanvases[i].width : 0;
+        mCtx.drawImage(maskImg, mx, pad, lw, letterH);
+        mx+=lw+gap;
+      }
+
+      // 2. Build palm layer: draw palm.png cover-fitted to the text area
+      const palmCv  = document.createElement('canvas');
+      palmCv.width  = totalW; palmCv.height = totalH;
+      const pCtx    = palmCv.getContext('2d');
+      const ps = Math.max(totalW/palmImg.naturalWidth, totalH/palmImg.naturalHeight);
+      const pw = palmImg.naturalWidth*ps, ph = palmImg.naturalHeight*ps;
+      pCtx.drawImage(palmImg, (totalW-pw)/2, (totalH-ph)/2, pw, ph);
+
+      // 3. Clip palm layer by the combined mask
+      pCtx.globalCompositeOperation = 'destination-in';
+      pCtx.drawImage(maskCv, 0, 0);
+      pCtx.globalCompositeOperation = 'source-over';
+
+      // 4. Composite onto main canvas with 'screen' so gradient shines through
+      ctx.globalCompositeOperation = 'screen';
+      ctx.globalAlpha = 0.72;
+      ctx.drawImage(palmCv, 0, 0);
+      ctx.globalCompositeOperation = 'source-over';
+      ctx.globalAlpha = 1;
+    } catch(_){ /* palm.png missing — skip silently */ }
 
     outputCanvas.style.display = 'block';
     actionRow.classList.add('visible');
