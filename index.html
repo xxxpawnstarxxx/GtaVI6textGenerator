@@ -1,4 +1,3 @@
-<!-- made with claude btw -->
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -13,7 +12,6 @@
     --surface: #111118;
     --border: #1e1e2e;
     --accent: #ff6b35;
-    --accent2: #f7c59f;
     --text: #e8e8f0;
     --muted: #555570;
     --glow: rgba(255, 107, 53, 0.35);
@@ -29,7 +27,7 @@
     overflow-x: hidden;
   }
 
-  /* ── background art ── */
+  /* ── grain bg ── */
   .bg-art {
     position: fixed; inset: 0; z-index: 0;
     pointer-events: none; overflow: hidden;
@@ -46,7 +44,6 @@
     min-height: 100vh;
     display: flex; flex-direction: column; align-items: center;
     padding: 40px 20px 80px;
-    gap: 0;
   }
 
   /* ── header ── */
@@ -54,10 +51,10 @@
     width: 100%; max-width: 900px;
     display: flex; flex-direction: column; align-items: center;
     gap: 8px;
-    margin-bottom: 48px;
+    margin-bottom: 40px;
   }
   .palm-wrap {
-    width: 90px; height: 90px;
+    width: 80px; height: 80px;
     display: flex; align-items: center; justify-content: center;
     filter: drop-shadow(0 0 18px var(--glow));
     animation: palmBob 4s ease-in-out infinite;
@@ -77,39 +74,6 @@
     background-clip: text;
     filter: drop-shadow(0 0 12px var(--glow));
   }
-  .tagline {
-    font-size: 0.78rem;
-    letter-spacing: 0.28em;
-    text-transform: uppercase;
-    color: var(--muted);
-  }
-
-  /* ── artwork carousel ── */
-  .art-strip {
-    width: 100%; overflow: hidden;
-    margin-bottom: 48px;
-    mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
-    -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
-  }
-  .art-track {
-    display: flex; gap: 12px;
-    animation: artScroll 30s linear infinite;
-    width: max-content;
-  }
-  .art-strip:hover .art-track { animation-play-state: paused; }
-  @keyframes artScroll {
-    from { transform: translateX(0); }
-    to   { transform: translateX(-50%); }
-  }
-  .art-thumb {
-    width: 140px; height: 90px;
-    border-radius: 6px;
-    object-fit: cover;
-    border: 1px solid var(--border);
-    flex-shrink: 0;
-    transition: border-color .3s, transform .3s;
-  }
-  .art-thumb:hover { border-color: var(--accent); transform: scale(1.05); }
 
   /* ── card ── */
   .card {
@@ -117,25 +81,22 @@
     background: var(--surface);
     border: 1px solid var(--border);
     border-radius: 16px;
-    padding: 36px 32px 32px;
+    padding: 32px;
     box-shadow: 0 0 60px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.04);
+    display: flex; flex-direction: column; gap: 24px;
   }
 
-  /* ── input row ── */
-  .input-row {
-    display: flex; gap: 12px; align-items: stretch;
-    margin-bottom: 28px;
-  }
+  /* ── input ── */
   #textInput {
-    flex: 1;
+    width: 100%;
     background: #0d0d14;
     border: 1px solid var(--border);
     border-radius: 10px;
-    padding: 14px 18px;
+    padding: 16px 20px;
     color: var(--text);
     font-family: inherit;
-    font-size: 1.1rem;
-    letter-spacing: 0.08em;
+    font-size: 1.15rem;
+    letter-spacing: 0.1em;
     outline: none;
     transition: border-color .25s, box-shadow .25s;
   }
@@ -144,31 +105,11 @@
     border-color: var(--accent);
     box-shadow: 0 0 0 3px var(--glow);
   }
-  #textInput:invalid { border-color: #c84b2f; }
 
-  .btn {
-    padding: 14px 28px;
-    border-radius: 10px;
-    border: none; cursor: pointer;
-    font-family: inherit; font-weight: 700;
-    letter-spacing: 0.12em; text-transform: uppercase;
-    font-size: 0.85rem;
-    transition: transform .15s, box-shadow .2s, filter .2s;
-  }
-  .btn:active { transform: scale(.96); }
-
-  .btn-generate {
-    background: linear-gradient(135deg, #ff6b35, #e8401a);
-    color: #fff;
-    box-shadow: 0 4px 20px rgba(255,107,53,.4);
-  }
-  .btn-generate:hover { filter: brightness(1.15); box-shadow: 0 6px 30px rgba(255,107,53,.6); }
-
-  /* ── options row ── */
+  /* ── options ── */
   .options-row {
-    display: flex; flex-wrap: wrap; gap: 14px; align-items: center;
-    margin-bottom: 28px;
-    padding-bottom: 28px;
+    display: flex; flex-wrap: wrap; gap: 16px; align-items: flex-end;
+    padding-bottom: 24px;
     border-bottom: 1px solid var(--border);
   }
   .opt-group { display: flex; flex-direction: column; gap: 5px; }
@@ -200,7 +141,7 @@
   }
   .range-wrap { display: flex; align-items: center; gap: 8px; }
 
-  /* ── canvas preview ── */
+  /* ── preview ── */
   .preview-wrap {
     min-height: 160px;
     display: flex; align-items: center; justify-content: center;
@@ -212,7 +153,6 @@
   }
   #outputCanvas {
     max-width: 100%;
-    border-radius: 8px;
     display: none;
   }
   .placeholder-msg {
@@ -222,41 +162,58 @@
     text-transform: uppercase;
     text-align: center;
     padding: 40px 20px;
+    position: absolute;
   }
   .loader {
     display: none;
     flex-direction: column; align-items: center; gap: 14px;
+    position: absolute;
   }
   .loader.active { display: flex; }
   .loader-ring {
-    width: 42px; height: 42px;
+    width: 36px; height: 36px;
     border: 3px solid var(--border);
     border-top-color: var(--accent);
     border-radius: 50%;
-    animation: spin .8s linear infinite;
+    animation: spin .7s linear infinite;
   }
   @keyframes spin { to { transform: rotate(360deg); } }
   .loader-text {
-    font-size: 0.75rem; letter-spacing: 0.2em;
+    font-size: 0.72rem; letter-spacing: 0.2em;
     text-transform: uppercase; color: var(--muted);
   }
 
-  /* ── action buttons ── */
+  /* ── char warning ── */
+  .char-warn {
+    font-size: 0.72rem;
+    color: #c84b2f;
+    letter-spacing: 0.1em;
+    min-height: 16px;
+  }
+
+  /* ── actions ── */
   .actions {
-    display: flex; gap: 10px; flex-wrap: wrap;
-    margin-top: 20px;
+    display: none;
+    gap: 10px; flex-wrap: wrap;
     justify-content: flex-end;
   }
+  .actions.visible { display: flex; }
+  .btn {
+    padding: 12px 24px;
+    border-radius: 10px;
+    border: none; cursor: pointer;
+    font-family: inherit; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    font-size: 0.82rem;
+    transition: transform .15s, box-shadow .2s, filter .2s;
+  }
+  .btn:active { transform: scale(.96); }
   .btn-dl {
     background: transparent;
     border: 1px solid var(--accent);
     color: var(--accent);
-    box-shadow: none;
   }
-  .btn-dl:hover {
-    background: rgba(255,107,53,.1);
-    box-shadow: 0 0 16px var(--glow);
-  }
+  .btn-dl:hover { background: rgba(255,107,53,.1); box-shadow: 0 0 16px var(--glow); }
   .btn-copy {
     background: transparent;
     border: 1px solid var(--border);
@@ -266,7 +223,7 @@
 
   /* ── footer ── */
   footer {
-    margin-top: 56px;
+    margin-top: 48px;
     color: var(--muted);
     font-size: 0.7rem;
     letter-spacing: 0.18em;
@@ -275,49 +232,27 @@
   }
   footer a { color: var(--accent); text-decoration: none; }
 
-  /* ── unsupported char badge ── */
-  .char-warn {
-    margin-top: 10px;
-    font-size: 0.72rem;
-    color: #c84b2f;
-    letter-spacing: 0.1em;
-    min-height: 18px;
-  }
-
   @media (max-width: 540px) {
-    .card { padding: 22px 16px; }
-    .input-row { flex-direction: column; }
-    .btn-generate { width: 100%; }
+    .card { padding: 20px 16px; }
   }
 </style>
 </head>
 <body>
 
-<!-- noise grain bg -->
 <div class="bg-art"><canvas id="grainCanvas"></canvas></div>
 
 <div class="page">
   <header>
     <div class="palm-wrap">
-      <img src="Assets/palm.png" alt="Palm" onerror="this.style.display='none'">
+      <img src="Assets/palm.png" alt="" onerror="this.style.display='none'">
     </div>
     <h1>GTA VI Text Generator</h1>
-    <p class="tagline">Welcome to Vice City &mdash; make it legendary</p>
   </header>
 
-  <!-- artwork strip -->
-  <div class="art-strip">
-    <div class="art-track" id="artTrack"></div>
-  </div>
-
   <div class="card">
-    <!-- input -->
-    <div class="input-row">
-      <input type="text" id="textInput" placeholder="Type your text…" maxlength="24" autocomplete="off" spellcheck="false">
-      <button class="btn btn-generate" id="generateBtn">Generate</button>
-    </div>
 
-    <!-- options -->
+    <input type="text" id="textInput" placeholder="Start typing…" maxlength="24" autocomplete="off" spellcheck="false">
+
     <div class="options-row">
       <div class="opt-group">
         <span class="opt-label">Background</span>
@@ -336,7 +271,7 @@
         <input type="color" id="bgColor" value="#1a0a2e">
       </div>
       <div class="opt-group">
-        <span class="opt-label">Letter height (px)</span>
+        <span class="opt-label">Letter height</span>
         <div class="range-wrap">
           <input type="range" id="sizeRange" min="60" max="300" value="140" step="10">
           <span class="range-val" id="sizeVal">140</span>
@@ -358,22 +293,21 @@
       </div>
     </div>
 
-    <!-- preview -->
-    <div class="preview-wrap" id="previewWrap">
-      <p class="placeholder-msg" id="placeholderMsg">Type something and hit Generate ↑</p>
+    <div class="preview-wrap">
+      <p class="placeholder-msg" id="placeholderMsg">Start typing to preview</p>
       <div class="loader" id="loader">
         <div class="loader-ring"></div>
-        <span class="loader-text">Loading assets…</span>
+        <span class="loader-text">Rendering…</span>
       </div>
       <canvas id="outputCanvas"></canvas>
     </div>
     <p class="char-warn" id="charWarn"></p>
 
-    <!-- action row -->
-    <div class="actions" id="actionRow" style="display:none">
+    <div class="actions" id="actionRow">
       <button class="btn btn-copy" id="copyBtn">Copy image</button>
       <button class="btn btn-dl" id="dlBtn">Download PNG</button>
     </div>
+
   </div>
 
   <footer>
@@ -384,125 +318,90 @@
 </div>
 
 <script>
-/* ─────────────────────────────────────────────
-   CONFIG
-───────────────────────────────────────────── */
-const BASE   = 'Assets/';
+/* ─── CONFIG ─── */
+const BASE    = 'Assets/';
 const NUM_ART = 9;
 const LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 
-/* ─────────────────────────────────────────────
-   GRAIN CANVAS
-───────────────────────────────────────────── */
-(function grain(){
-  const cv = document.getElementById('grainCanvas');
+/* ─── GRAIN ─── */
+(function(){
+  const cv  = document.getElementById('grainCanvas');
   const ctx = cv.getContext('2d');
   function resize(){ cv.width = innerWidth; cv.height = innerHeight; }
   function draw(){
     const id = ctx.createImageData(cv.width, cv.height);
     const d  = id.data;
-    for(let i=0;i<d.length;i+=4){
-      const v = Math.random()*255|0;
-      d[i]=d[i+1]=d[i+2]=v; d[i+3]=255;
-    }
+    for(let i=0;i<d.length;i+=4){ const v=Math.random()*255|0; d[i]=d[i+1]=d[i+2]=v; d[i+3]=255; }
     ctx.putImageData(id,0,0);
   }
   resize(); draw();
   window.addEventListener('resize', ()=>{ resize(); draw(); });
 })();
 
-/* ─────────────────────────────────────────────
-   ARTWORK STRIP
-───────────────────────────────────────────── */
-(function artStrip(){
-  const track = document.getElementById('artTrack');
+/* ─── POPULATE ARTWORK SELECT ─── */
+(function(){
   const artSel = document.getElementById('artSelect');
   for(let i=1;i<=NUM_ART;i++){
-    const path = `Assets/Backrounds/artwork${i}.jpg`;
-    // strip
-    const img = document.createElement('img');
-    img.src = path; img.className = 'art-thumb'; img.alt = `Artwork ${i}`;
-    track.appendChild(img);
-    // duplicate for infinite scroll
-    const img2 = img.cloneNode(); track.appendChild(img2);
-    // select option
     const opt = document.createElement('option');
-    opt.value = path; opt.textContent = `Artwork ${i}`;
+    opt.value       = `Assets/Backrounds/artwork${i}.jpg`;
+    opt.textContent = `Artwork ${i}`;
     artSel.appendChild(opt);
   }
 })();
 
-/* ─────────────────────────────────────────────
-   BG SELECT LOGIC
-───────────────────────────────────────────── */
-const bgSelect    = document.getElementById('bgSelect');
-const artPickWrap = document.getElementById('artPickWrap');
+/* ─── BG MODE TOGGLE ─── */
+const bgSelect      = document.getElementById('bgSelect');
+const artPickWrap   = document.getElementById('artPickWrap');
 const colorPickWrap = document.getElementById('colorPickWrap');
 bgSelect.addEventListener('change', ()=>{
   artPickWrap.style.display   = bgSelect.value==='artwork' ? 'flex' : 'none';
   colorPickWrap.style.display = bgSelect.value==='color'   ? 'flex' : 'none';
+  scheduleRender();
 });
+document.getElementById('artSelect').addEventListener('change', scheduleRender);
+document.getElementById('bgColor').addEventListener('input',   scheduleRender);
 
-/* ─────────────────────────────────────────────
-   RANGE DISPLAYS
-───────────────────────────────────────────── */
-['size','gap','shadow'].forEach(k=>{
+/* ─── RANGE LABELS + LIVE UPDATE ─── */
+['size','gap','shadow'].forEach(k => {
   const r = document.getElementById(k+'Range');
   const v = document.getElementById(k+'Val');
-  r.addEventListener('input', ()=>v.textContent=r.value);
+  r.addEventListener('input', ()=>{ v.textContent = r.value; scheduleRender(); });
 });
 
-/* ─────────────────────────────────────────────
-   IMAGE CACHE
-───────────────────────────────────────────── */
+/* ─── IMAGE CACHE ─── */
 const imgCache = {};
 function loadImg(src){
   if(imgCache[src]) return imgCache[src];
   const p = new Promise((res,rej)=>{
     const img = new Image();
     img.crossOrigin = 'anonymous';
-    img.onload  = ()=>res(img);
-    img.onerror = ()=>rej(new Error('Failed: '+src));
+    img.onload  = ()=> res(img);
+    img.onerror = ()=> rej(new Error('Failed: '+src));
     img.src = src;
   });
   imgCache[src] = p;
   return p;
 }
 
-/* ─────────────────────────────────────────────
-   LETTER RENDERER
-   Each letter = bg clipped by mask
-───────────────────────────────────────────── */
+/* ─── LETTER RENDERER ─── */
 async function renderLetter(letter, height){
   const L = letter.toUpperCase();
-  const bgSrc   = `${BASE}text/bg/bg${L}.png`;
-  const maskSrc = `${BASE}text/mask/mask${L}.png`;
-  const [bgImg, maskImg] = await Promise.all([loadImg(bgSrc), loadImg(maskSrc)]);
-
-  // Scale proportionally to desired height
-  const aspectBg   = bgImg.naturalWidth   / bgImg.naturalHeight;
-  const aspectMask = maskImg.naturalWidth / maskImg.naturalHeight;
-  const aspect = aspectMask; // use mask for sizing
-  const w = Math.round(height * aspect);
-  const h = height;
-
+  const [bgImg, maskImg] = await Promise.all([
+    loadImg(`${BASE}text/bg/bg${L}.png`),
+    loadImg(`${BASE}text/mask/mask${L}.png`)
+  ]);
+  const w   = Math.round(height * maskImg.naturalWidth / maskImg.naturalHeight);
   const cv  = document.createElement('canvas');
-  cv.width  = w; cv.height = h;
+  cv.width  = w; cv.height = height;
   const ctx = cv.getContext('2d');
-
-  // Draw colour background (gradient)
-  ctx.drawImage(bgImg, 0, 0, w, h);
-  // Clip to mask shape
+  ctx.drawImage(bgImg, 0, 0, w, height);
   ctx.globalCompositeOperation = 'destination-in';
-  ctx.drawImage(maskImg, 0, 0, w, h);
+  ctx.drawImage(maskImg, 0, 0, w, height);
   ctx.globalCompositeOperation = 'source-over';
   return cv;
 }
 
-/* ─────────────────────────────────────────────
-   MAIN GENERATE
-───────────────────────────────────────────── */
-const generateBtn    = document.getElementById('generateBtn');
+/* ─── ELEMENTS ─── */
 const textInput      = document.getElementById('textInput');
 const outputCanvas   = document.getElementById('outputCanvas');
 const placeholderMsg = document.getElementById('placeholderMsg');
@@ -510,15 +409,35 @@ const loaderEl       = document.getElementById('loader');
 const actionRow      = document.getElementById('actionRow');
 const charWarn       = document.getElementById('charWarn');
 
-generateBtn.addEventListener('click', generate);
-textInput.addEventListener('keydown', e=>{ if(e.key==='Enter') generate(); });
+/* ─── LIVE RENDER ORCHESTRATION ─── */
+let renderTimer   = null;
+let rendering     = false;
+let pendingRender = false;
 
-async function generate(){
-  const raw = textInput.value.trim();
-  if(!raw) return;
+textInput.addEventListener('input', scheduleRender);
 
-  // Filter to supported chars (A-Z only; spaces get a gap)
-  const chars = raw.toUpperCase().split('');
+function scheduleRender(){
+  clearTimeout(renderTimer);
+  renderTimer = setTimeout(doRender, 100);   // 100 ms debounce — snappy but not every keystroke
+}
+
+async function doRender(){
+  if(rendering){ pendingRender = true; return; }
+  rendering = true;
+
+  const raw = textInput.value;
+
+  if(!raw.trim()){
+    outputCanvas.style.display = 'none';
+    placeholderMsg.style.display = 'block';
+    loaderEl.classList.remove('active');
+    actionRow.classList.remove('visible');
+    charWarn.textContent = '';
+    rendering = false;
+    return;
+  }
+
+  const chars     = raw.toUpperCase().split('');
   const supported = chars.filter(c => c===' ' || LETTERS.includes(c));
   const skipped   = [...new Set(chars.filter(c => c!==' ' && !LETTERS.includes(c)))];
 
@@ -527,118 +446,103 @@ async function generate(){
     : '';
 
   if(!supported.length || supported.every(c=>c===' ')){
-    charWarn.textContent = '⚠ No supported letters found. Only A–Z are supported.';
+    charWarn.textContent = '⚠ No supported letters found (A–Z only).';
+    rendering = false;
     return;
   }
 
-  // Show loader
   placeholderMsg.style.display = 'none';
-  outputCanvas.style.display   = 'none';
   loaderEl.classList.add('active');
-  actionRow.style.display      = 'none';
-  generateBtn.disabled = true;
 
   const letterH = parseInt(document.getElementById('sizeRange').value);
   const gap     = parseInt(document.getElementById('gapRange').value);
   const shadowB = parseInt(document.getElementById('shadowRange').value);
 
   try {
-    // Preload letter canvases
-    const letterPromises = supported.map(c =>
-      c === ' ' ? Promise.resolve(null) : renderLetter(c, letterH)
+    const letterCanvases = await Promise.all(
+      supported.map(c => c===' ' ? Promise.resolve(null) : renderLetter(c, letterH))
     );
-    const letterCanvases = await Promise.all(letterPromises);
 
     const spaceW = Math.round(letterH * 0.35);
     const pad    = shadowB + 4;
-    const totalW = letterCanvases.reduce((sum, cv) =>
-      sum + (cv ? cv.width : spaceW) + gap, -gap) + pad*2;
+    const totalW = letterCanvases.reduce((s,cv) => s + (cv ? cv.width : spaceW) + gap, -gap) + pad*2;
     const totalH = letterH + pad*2;
 
     outputCanvas.width  = totalW;
     outputCanvas.height = totalH;
     const ctx = outputCanvas.getContext('2d');
+    ctx.clearRect(0, 0, totalW, totalH);
 
-    // ── background ──
-    const bgMode = document.getElementById('bgSelect').value;
-    if(bgMode === 'color'){
+    // background
+    if(bgSelect.value === 'color'){
       ctx.fillStyle = document.getElementById('bgColor').value;
-      ctx.fillRect(0,0,totalW,totalH);
-    } else if(bgMode === 'artwork'){
-      const artSrc = document.getElementById('artSelect').value;
+      ctx.fillRect(0, 0, totalW, totalH);
+    } else if(bgSelect.value === 'artwork'){
       try {
-        const artImg = await loadImg(artSrc);
-        // cover-fit
-        const scaleX = totalW / artImg.naturalWidth;
-        const scaleY = totalH / artImg.naturalHeight;
-        const scale  = Math.max(scaleX, scaleY);
-        const dw = artImg.naturalWidth  * scale;
-        const dh = artImg.naturalHeight * scale;
-        const dx = (totalW - dw) / 2;
-        const dy = (totalH - dh) / 2;
-        ctx.drawImage(artImg, dx, dy, dw, dh);
-      } catch(e){ /* fallback transparent */ }
+        const art   = await loadImg(document.getElementById('artSelect').value);
+        const scale = Math.max(totalW/art.naturalWidth, totalH/art.naturalHeight);
+        const dw=art.naturalWidth*scale, dh=art.naturalHeight*scale;
+        ctx.drawImage(art, (totalW-dw)/2, (totalH-dh)/2, dw, dh);
+      } catch(_){}
     }
 
-    // ── shadow pass ──
+    // shadow pass
     if(shadowB > 0){
       ctx.save();
-      ctx.filter = `blur(${shadowB}px)`;
+      ctx.filter      = `blur(${shadowB}px)`;
       ctx.globalAlpha = 0.55;
       let x = pad;
       for(const cv of letterCanvases){
-        if(!cv){ x += spaceW + gap; continue; }
-        ctx.drawImage(cv, x + shadowB*0.4, pad + shadowB*0.6);
-        x += cv.width + gap;
+        if(!cv){ x+=spaceW+gap; continue; }
+        ctx.drawImage(cv, x+shadowB*0.4, pad+shadowB*0.6);
+        x+=cv.width+gap;
       }
       ctx.restore();
     }
 
-    // ── letter pass ──
+    // letter pass
     let x = pad;
     for(const cv of letterCanvases){
-      if(!cv){ x += spaceW + gap; continue; }
+      if(!cv){ x+=spaceW+gap; continue; }
       ctx.drawImage(cv, x, pad);
-      x += cv.width + gap;
+      x+=cv.width+gap;
     }
 
     outputCanvas.style.display = 'block';
-    actionRow.style.display    = 'flex';
+    actionRow.classList.add('visible');
+
   } catch(err){
-    placeholderMsg.textContent = '⚠ Error loading assets. Check console.';
-    placeholderMsg.style.display = 'block';
+    placeholderMsg.textContent  = '⚠ Error loading assets. Check console.';
+    placeholderMsg.style.display= 'block';
+    outputCanvas.style.display  = 'none';
     console.error(err);
   } finally {
     loaderEl.classList.remove('active');
-    generateBtn.disabled = false;
+    rendering = false;
+    if(pendingRender){ pendingRender=false; doRender(); }
   }
 }
 
-/* ─────────────────────────────────────────────
-   DOWNLOAD & COPY
-───────────────────────────────────────────── */
+/* ─── DOWNLOAD ─── */
 document.getElementById('dlBtn').addEventListener('click', ()=>{
-  const text = textInput.value.trim().replace(/[^a-z0-9]/gi,'_') || 'gta6_text';
-  const a = document.createElement('a');
-  a.download = `${text}.png`;
-  a.href = outputCanvas.toDataURL('image/png');
+  const name = textInput.value.trim().replace(/[^a-z0-9]/gi,'_') || 'gta6_text';
+  const a    = document.createElement('a');
+  a.download = `${name}.png`;
+  a.href     = outputCanvas.toDataURL('image/png');
   a.click();
 });
 
-document.getElementById('copyBtn').addEventListener('click', async ()=>{
-  try {
-    outputCanvas.toBlob(async blob=>{
-      await navigator.clipboard.write([
-        new ClipboardItem({'image/png': blob})
-      ]);
-      const btn = document.getElementById('copyBtn');
+/* ─── COPY ─── */
+document.getElementById('copyBtn').addEventListener('click', ()=>{
+  outputCanvas.toBlob(async blob => {
+    try {
+      await navigator.clipboard.write([new ClipboardItem({'image/png': blob})]);
+      const btn  = document.getElementById('copyBtn');
       const orig = btn.textContent;
       btn.textContent = '✓ Copied!';
-      setTimeout(()=>btn.textContent=orig, 2000);
-    });
-  } catch(e){
-    alert('Copy failed – try downloading instead.');
-  }
+      setTimeout(()=> btn.textContent=orig, 2000);
+    } catch(e){ alert('Copy failed – try downloading instead.'); }
+  });
 });
 </script>
 </body>
