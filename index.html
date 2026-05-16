@@ -1,0 +1,936 @@
+
+Claude is responding
+Make me a gta 6 text generator, im hosting on github, assets are 
+Name    Last commit message    Last commit date
+..
+Backrounds
+add the assets
+18 minutes ago
+text
+add the assets
+18 minutes ago
+palm.png
+add the assets
+18 minutes ago
+social-share.png 
+Name    Last commit message    Last commit date
+..
+artowork1.jpg
+add the assets
+19 minutes ago
+artwork2.jpg
+add the assets
+19 minutes ago
+artwork3.jpg
+add the assets
+19 minutes ago
+artwork4.jpg
+add the assets
+19 minutes ago
+artwork5.jpg
+add the assets
+19 minutes ago
+artwork6.jpg
+add the assets
+19 minutes ago
+artwork7.jpg
+add the assets
+19 minutes ago
+artwork8.jpg
+add the assets
+19 minutes ago
+artwork9.jpg f2ebf32
+ · 
+19 minutes ago
+GtaVI6textGenerator/Assets/text
+/bg/
+Name    Last commit message    Last commit date
+..
+bgA.png
+add the assets
+19 minutes ago
+bgB.png
+add the assets
+19 minutes ago
+bgC.png
+add the assets
+19 minutes ago
+bgD.png
+add the assets
+19 minutes ago
+bgE.png
+add the assets
+19 minutes ago
+bgF.png
+add the assets
+19 minutes ago
+bgG.png
+add the assets
+19 minutes ago
+bgH.png
+add the assets
+19 minutes ago
+bgI.png
+add the assets
+19 minutes ago
+bgJ.png
+add the assets
+19 minutes ago
+bgK.png
+add the assets
+19 minutes ago
+bgL.png
+add the assets
+19 minutes ago
+bgM.png
+add the assets
+19 minutes ago
+bgN.png
+add the assets
+19 minutes ago
+bgO.png
+add the assets
+19 minutes ago
+bgP.png
+add the assets
+19 minutes ago
+bgQ.png
+add the assets
+19 minutes ago
+bgR.png
+add the assets
+19 minutes ago
+bgS.png
+add the assets
+19 minutes ago
+bgT.png
+add the assets
+19 minutes ago
+bgU.png
+add the assets
+19 minutes ago
+bgV.png
+add the assets
+19 minutes ago
+bgW.png
+add the assets
+19 minutes ago
+bgX.png
+add the assets
+19 minutes ago
+bgY.png
+add the assets
+19 minutes ago
+bgZ.png
+add the assets
+19 minutes ago
+ xxxpawnstarxxx
+xxxpawnstarxxx
+add the assets
+f2ebf32
+ · 
+19 minutes ago
+GtaVI6textGenerator/Assets/text
+/mask/
+Name    Last commit message    Last commit date
+..
+maskA.png
+add the assets
+19 minutes ago
+maskB.png
+add the assets
+19 minutes ago
+maskC.png
+add the assets
+19 minutes ago
+maskD.png
+add the assets
+19 minutes ago
+maskE.png
+add the assets
+19 minutes ago
+maskF.png
+add the assets
+19 minutes ago
+maskG.png
+add the assets
+19 minutes ago
+maskH.png
+add the assets
+19 minutes ago
+maskI.png
+add the assets
+19 minutes ago
+maskJ.png
+add the assets
+19 minutes ago
+maskK.png
+add the assets
+19 minutes ago
+maskL.png
+add the assets
+19 minutes ago
+maskM.png
+add the assets
+19 minutes ago
+maskN.png
+add the assets
+19 minutes ago
+maskO.png
+add the assets
+19 minutes ago
+maskP.png
+add the assets
+19 minutes ago
+maskQ.png
+add the assets
+19 minutes ago
+maskR.png
+add the assets
+19 minutes ago
+maskS.png
+add the assets
+19 minutes ago
+maskT.png
+add the assets
+19 minutes ago
+maskU.png
+add the assets
+19 minutes ago
+maskV.png
+add the assets
+19 minutes ago
+maskW.png
+add the assets
+19 minutes ago
+maskX.png
+add the assets
+19 minutes ago
+maskY.png
+add the assets
+19 minutes ago
+maskZ.png
+add the assets
+19 minutes ago
+, single file index.html with inline css and js
+
+Show less
+12:33
+
+Viewed a file, created a file
+Viewed a file, created a file
+The user wants a GTA 6 text generator as a single index.html file. They're hosting on GitHub and have assets at a specific path. Let me figure out the GitHub repo structure.
+
+From the file listing, the repo appears to be: xxxpawnstarxxx/GtaVI6textGenerator (based on the username and path mentions).
+
+Assets structure:
+
+Assets/palm.png
+Assets/social-share.png
+Assets/Backrounds/ (note the typo - "Backrounds" not "Backgrounds")
+artwork1.jpg through artwork9.jpg
+Assets/text/bg/ - bgA.png through bgZ.png (26 letters)
+Assets/text/mask/ - maskA.png through maskZ.png (26 letters)
+The GitHub raw URL pattern would be: https://raw.githubusercontent.com/xxxpawnstarxxx/GtaVI6textGenerator/main/Assets/...
+
+So the text generator works by:
+
+User types text
+For each letter, overlay the bg letter image with the mask letter image to create the GTA VI style text
+The bg images are the colorful gradient backgrounds for each letter
+The mask images are probably the letter shape masks
+This is the classic GTA VI logo text generator - it uses canvas to composite bg + mask images per character to create the gradient-filled letter effect.
+
+The approach:
+
+For each character in the input text, load bgX.png and maskX.png where X is the uppercase letter
+Use canvas to draw the bg, then apply the mask to clip/composite it
+Stack them together
+Let me think about how to implement this properly. The mask is likely a PNG with the letter shape in white/black, and the bg is the colorful gradient. We need to use canvas compositing:
+
+Draw the bg image
+Apply mask using destination-in or similar compositing
+Let me look at the frontend design skill first.
+
+Actually, let me just build this. The approach for each letter:
+
+Create a canvas
+Draw bgX.png
+Use globalCompositeOperation = 'destination-in' with maskX.png to clip to letter shape
+Then combine all letter canvases horizontally.
+
+I need to read the frontend-design skill first.
+
+Show more
+
+Read frontend design skill
+
+GTA 6 text generator - single HTML file
+index.html
+Done
+There's a small syntax error I need to fix (stray }):
+
+
+Edited a file, read a file
+Edited a file, read a file
+Here's your index.html — drop it in the root of your repo alongside your Assets/ folder and it'll work instantly.
+
+What it does:
+
+Letter rendering — each character loads Assets/text/bg/bgX.png + Assets/text/mask/maskX.png, composites them with destination-in blending so the gradient background is clipped to the letter mask shape
+Spaces are rendered as proportional ga
+
+Index
+Code · HTML 
+
+
+
+Claude is AI and can make mistakes. Please double-check responses.
+Index · HTML
+Copy
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>GTA VI Text Generator</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Proza+Libre:wght@400;700&display=swap');
+ 
+  :root {
+    --base: #0a0a0f;
+    --surface: #111118;
+    --border: #1e1e2e;
+    --accent: #ff6b35;
+    --accent2: #f7c59f;
+    --text: #e8e8f0;
+    --muted: #555570;
+    --glow: rgba(255, 107, 53, 0.35);
+  }
+ 
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+ 
+  html, body {
+    min-height: 100%;
+    background: var(--base);
+    color: var(--text);
+    font-family: 'Proza Libre', serif;
+    overflow-x: hidden;
+  }
+ 
+  /* ── background art ── */
+  .bg-art {
+    position: fixed; inset: 0; z-index: 0;
+    pointer-events: none; overflow: hidden;
+  }
+  .bg-art canvas {
+    position: absolute; inset: 0;
+    width: 100%; height: 100%;
+    opacity: 0.07;
+  }
+ 
+  /* ── layout ── */
+  .page {
+    position: relative; z-index: 1;
+    min-height: 100vh;
+    display: flex; flex-direction: column; align-items: center;
+    padding: 40px 20px 80px;
+    gap: 0;
+  }
+ 
+  /* ── header ── */
+  header {
+    width: 100%; max-width: 900px;
+    display: flex; flex-direction: column; align-items: center;
+    gap: 8px;
+    margin-bottom: 48px;
+  }
+  .palm-wrap {
+    width: 90px; height: 90px;
+    display: flex; align-items: center; justify-content: center;
+    filter: drop-shadow(0 0 18px var(--glow));
+    animation: palmBob 4s ease-in-out infinite;
+  }
+  .palm-wrap img { width: 100%; height: 100%; object-fit: contain; }
+  @keyframes palmBob {
+    0%,100% { transform: translateY(0) rotate(-3deg); }
+    50%      { transform: translateY(-8px) rotate(3deg); }
+  }
+  h1 {
+    font-size: clamp(1.6rem, 5vw, 2.8rem);
+    font-weight: 700;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, #ff9966 0%, #ff6b35 40%, #ffcba4 70%, #ff6b35 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    filter: drop-shadow(0 0 12px var(--glow));
+  }
+  .tagline {
+    font-size: 0.78rem;
+    letter-spacing: 0.28em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+ 
+  /* ── artwork carousel ── */
+  .art-strip {
+    width: 100%; overflow: hidden;
+    margin-bottom: 48px;
+    mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 12%, black 88%, transparent);
+  }
+  .art-track {
+    display: flex; gap: 12px;
+    animation: artScroll 30s linear infinite;
+    width: max-content;
+  }
+  .art-strip:hover .art-track { animation-play-state: paused; }
+  @keyframes artScroll {
+    from { transform: translateX(0); }
+    to   { transform: translateX(-50%); }
+  }
+  .art-thumb {
+    width: 140px; height: 90px;
+    border-radius: 6px;
+    object-fit: cover;
+    border: 1px solid var(--border);
+    flex-shrink: 0;
+    transition: border-color .3s, transform .3s;
+  }
+  .art-thumb:hover { border-color: var(--accent); transform: scale(1.05); }
+ 
+  /* ── card ── */
+  .card {
+    width: 100%; max-width: 820px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 36px 32px 32px;
+    box-shadow: 0 0 60px rgba(0,0,0,.6), inset 0 1px 0 rgba(255,255,255,.04);
+  }
+ 
+  /* ── input row ── */
+  .input-row {
+    display: flex; gap: 12px; align-items: stretch;
+    margin-bottom: 28px;
+  }
+  #textInput {
+    flex: 1;
+    background: #0d0d14;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    padding: 14px 18px;
+    color: var(--text);
+    font-family: inherit;
+    font-size: 1.1rem;
+    letter-spacing: 0.08em;
+    outline: none;
+    transition: border-color .25s, box-shadow .25s;
+  }
+  #textInput::placeholder { color: var(--muted); }
+  #textInput:focus {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--glow);
+  }
+  #textInput:invalid { border-color: #c84b2f; }
+ 
+  .btn {
+    padding: 14px 28px;
+    border-radius: 10px;
+    border: none; cursor: pointer;
+    font-family: inherit; font-weight: 700;
+    letter-spacing: 0.12em; text-transform: uppercase;
+    font-size: 0.85rem;
+    transition: transform .15s, box-shadow .2s, filter .2s;
+  }
+  .btn:active { transform: scale(.96); }
+ 
+  .btn-generate {
+    background: linear-gradient(135deg, #ff6b35, #e8401a);
+    color: #fff;
+    box-shadow: 0 4px 20px rgba(255,107,53,.4);
+  }
+  .btn-generate:hover { filter: brightness(1.15); box-shadow: 0 6px 30px rgba(255,107,53,.6); }
+ 
+  /* ── options row ── */
+  .options-row {
+    display: flex; flex-wrap: wrap; gap: 14px; align-items: center;
+    margin-bottom: 28px;
+    padding-bottom: 28px;
+    border-bottom: 1px solid var(--border);
+  }
+  .opt-group { display: flex; flex-direction: column; gap: 5px; }
+  .opt-label {
+    font-size: 0.68rem; letter-spacing: 0.22em;
+    text-transform: uppercase; color: var(--muted);
+  }
+  select, input[type=range], input[type=color] {
+    background: #0d0d14;
+    border: 1px solid var(--border);
+    border-radius: 7px;
+    color: var(--text);
+    font-family: inherit;
+    padding: 7px 10px;
+    font-size: 0.82rem;
+    outline: none;
+    cursor: pointer;
+    transition: border-color .2s;
+  }
+  select:hover, select:focus { border-color: var(--accent); }
+  input[type=range] {
+    padding: 0; width: 120px; height: 28px;
+    accent-color: var(--accent);
+  }
+  input[type=color] { width: 42px; height: 34px; padding: 3px; }
+  .range-val {
+    font-size: 0.75rem; color: var(--accent);
+    font-weight: 700; min-width: 28px; text-align: center;
+  }
+  .range-wrap { display: flex; align-items: center; gap: 8px; }
+ 
+  /* ── canvas preview ── */
+  .preview-wrap {
+    min-height: 160px;
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+    background: repeating-conic-gradient(#0d0d14 0% 25%, #121220 0% 50%) 0 0 / 20px 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border);
+  }
+  #outputCanvas {
+    max-width: 100%;
+    border-radius: 8px;
+    display: none;
+  }
+  .placeholder-msg {
+    color: var(--muted);
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    text-align: center;
+    padding: 40px 20px;
+  }
+  .loader {
+    display: none;
+    flex-direction: column; align-items: center; gap: 14px;
+  }
+  .loader.active { display: flex; }
+  .loader-ring {
+    width: 42px; height: 42px;
+    border: 3px solid var(--border);
+    border-top-color: var(--accent);
+    border-radius: 50%;
+    animation: spin .8s linear infinite;
+  }
+  @keyframes spin { to { transform: rotate(360deg); } }
+  .loader-text {
+    font-size: 0.75rem; letter-spacing: 0.2em;
+    text-transform: uppercase; color: var(--muted);
+  }
+ 
+  /* ── action buttons ── */
+  .actions {
+    display: flex; gap: 10px; flex-wrap: wrap;
+    margin-top: 20px;
+    justify-content: flex-end;
+  }
+  .btn-dl {
+    background: transparent;
+    border: 1px solid var(--accent);
+    color: var(--accent);
+    box-shadow: none;
+  }
+  .btn-dl:hover {
+    background: rgba(255,107,53,.1);
+    box-shadow: 0 0 16px var(--glow);
+  }
+  .btn-copy {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text);
+  }
+  .btn-copy:hover { border-color: #666; }
+ 
+  /* ── footer ── */
+  footer {
+    margin-top: 56px;
+    color: var(--muted);
+    font-size: 0.7rem;
+    letter-spacing: 0.18em;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  footer a { color: var(--accent); text-decoration: none; }
+ 
+  /* ── unsupported char badge ── */
+  .char-warn {
+    margin-top: 10px;
+    font-size: 0.72rem;
+    color: #c84b2f;
+    letter-spacing: 0.1em;
+    min-height: 18px;
+  }
+ 
+  @media (max-width: 540px) {
+    .card { padding: 22px 16px; }
+    .input-row { flex-direction: column; }
+    .btn-generate { width: 100%; }
+  }
+</style>
+</head>
+<body>
+ 
+<!-- noise grain bg -->
+<div class="bg-art"><canvas id="grainCanvas"></canvas></div>
+ 
+<div class="page">
+  <header>
+    <div class="palm-wrap">
+      <img src="Assets/palm.png" alt="Palm" onerror="this.style.display='none'">
+    </div>
+    <h1>GTA VI Text Generator</h1>
+    <p class="tagline">Welcome to Vice City &mdash; make it legendary</p>
+  </header>
+ 
+  <!-- artwork strip -->
+  <div class="art-strip">
+    <div class="art-track" id="artTrack"></div>
+  </div>
+ 
+  <div class="card">
+    <!-- input -->
+    <div class="input-row">
+      <input type="text" id="textInput" placeholder="Type your text…" maxlength="24" autocomplete="off" spellcheck="false">
+      <button class="btn btn-generate" id="generateBtn">Generate</button>
+    </div>
+ 
+    <!-- options -->
+    <div class="options-row">
+      <div class="opt-group">
+        <span class="opt-label">Background</span>
+        <select id="bgSelect">
+          <option value="none">None (transparent)</option>
+          <option value="artwork">Artwork</option>
+          <option value="color">Solid colour</option>
+        </select>
+      </div>
+      <div class="opt-group" id="artPickWrap" style="display:none">
+        <span class="opt-label">Artwork</span>
+        <select id="artSelect"></select>
+      </div>
+      <div class="opt-group" id="colorPickWrap" style="display:none">
+        <span class="opt-label">Colour</span>
+        <input type="color" id="bgColor" value="#1a0a2e">
+      </div>
+      <div class="opt-group">
+        <span class="opt-label">Letter height (px)</span>
+        <div class="range-wrap">
+          <input type="range" id="sizeRange" min="60" max="300" value="140" step="10">
+          <span class="range-val" id="sizeVal">140</span>
+        </div>
+      </div>
+      <div class="opt-group">
+        <span class="opt-label">Spacing</span>
+        <div class="range-wrap">
+          <input type="range" id="gapRange" min="-20" max="40" value="4" step="2">
+          <span class="range-val" id="gapVal">4</span>
+        </div>
+      </div>
+      <div class="opt-group">
+        <span class="opt-label">Shadow</span>
+        <div class="range-wrap">
+          <input type="range" id="shadowRange" min="0" max="30" value="8" step="2">
+          <span class="range-val" id="shadowVal">8</span>
+        </div>
+      </div>
+    </div>
+ 
+    <!-- preview -->
+    <div class="preview-wrap" id="previewWrap">
+      <p class="placeholder-msg" id="placeholderMsg">Type something and hit Generate ↑</p>
+      <div class="loader" id="loader">
+        <div class="loader-ring"></div>
+        <span class="loader-text">Loading assets…</span>
+      </div>
+      <canvas id="outputCanvas"></canvas>
+    </div>
+    <p class="char-warn" id="charWarn"></p>
+ 
+    <!-- action row -->
+    <div class="actions" id="actionRow" style="display:none">
+      <button class="btn btn-copy" id="copyBtn">Copy image</button>
+      <button class="btn btn-dl" id="dlBtn">Download PNG</button>
+    </div>
+  </div>
+ 
+  <footer>
+    Fan-made &middot; Not affiliated with Rockstar Games &middot;
+    GTA VI &trade; Rockstar Games &middot;
+    <a href="https://github.com/xxxpawnstarxxx/GtaVI6textGenerator" target="_blank">GitHub</a>
+  </footer>
+</div>
+ 
+<script>
+/* ─────────────────────────────────────────────
+   CONFIG
+───────────────────────────────────────────── */
+const BASE   = 'Assets/';
+const NUM_ART = 9;
+const LETTERS = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+ 
+/* ─────────────────────────────────────────────
+   GRAIN CANVAS
+───────────────────────────────────────────── */
+(function grain(){
+  const cv = document.getElementById('grainCanvas');
+  const ctx = cv.getContext('2d');
+  function resize(){ cv.width = innerWidth; cv.height = innerHeight; }
+  function draw(){
+    const id = ctx.createImageData(cv.width, cv.height);
+    const d  = id.data;
+    for(let i=0;i<d.length;i+=4){
+      const v = Math.random()*255|0;
+      d[i]=d[i+1]=d[i+2]=v; d[i+3]=255;
+    }
+    ctx.putImageData(id,0,0);
+  }
+  resize(); draw();
+  window.addEventListener('resize', ()=>{ resize(); draw(); });
+})();
+ 
+/* ─────────────────────────────────────────────
+   ARTWORK STRIP
+───────────────────────────────────────────── */
+(function artStrip(){
+  const track = document.getElementById('artTrack');
+  const artSel = document.getElementById('artSelect');
+  for(let i=1;i<=NUM_ART;i++){
+    const path = `Assets/Backrounds/artwork${i}.jpg`;
+    // strip
+    const img = document.createElement('img');
+    img.src = path; img.className = 'art-thumb'; img.alt = `Artwork ${i}`;
+    track.appendChild(img);
+    // duplicate for infinite scroll
+    const img2 = img.cloneNode(); track.appendChild(img2);
+    // select option
+    const opt = document.createElement('option');
+    opt.value = path; opt.textContent = `Artwork ${i}`;
+    artSel.appendChild(opt);
+  }
+})();
+ 
+/* ─────────────────────────────────────────────
+   BG SELECT LOGIC
+───────────────────────────────────────────── */
+const bgSelect    = document.getElementById('bgSelect');
+const artPickWrap = document.getElementById('artPickWrap');
+const colorPickWrap = document.getElementById('colorPickWrap');
+bgSelect.addEventListener('change', ()=>{
+  artPickWrap.style.display   = bgSelect.value==='artwork' ? 'flex' : 'none';
+  colorPickWrap.style.display = bgSelect.value==='color'   ? 'flex' : 'none';
+});
+ 
+/* ─────────────────────────────────────────────
+   RANGE DISPLAYS
+───────────────────────────────────────────── */
+['size','gap','shadow'].forEach(k=>{
+  const r = document.getElementById(k+'Range');
+  const v = document.getElementById(k+'Val');
+  r.addEventListener('input', ()=>v.textContent=r.value);
+});
+ 
+/* ─────────────────────────────────────────────
+   IMAGE CACHE
+───────────────────────────────────────────── */
+const imgCache = {};
+function loadImg(src){
+  if(imgCache[src]) return imgCache[src];
+  const p = new Promise((res,rej)=>{
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload  = ()=>res(img);
+    img.onerror = ()=>rej(new Error('Failed: '+src));
+    img.src = src;
+  });
+  imgCache[src] = p;
+  return p;
+}
+ 
+/* ─────────────────────────────────────────────
+   LETTER RENDERER
+   Each letter = bg clipped by mask
+───────────────────────────────────────────── */
+async function renderLetter(letter, height){
+  const L = letter.toUpperCase();
+  const bgSrc   = `${BASE}text/bg/bg${L}.png`;
+  const maskSrc = `${BASE}text/mask/mask${L}.png`;
+  const [bgImg, maskImg] = await Promise.all([loadImg(bgSrc), loadImg(maskSrc)]);
+ 
+  // Scale proportionally to desired height
+  const aspectBg   = bgImg.naturalWidth   / bgImg.naturalHeight;
+  const aspectMask = maskImg.naturalWidth / maskImg.naturalHeight;
+  const aspect = aspectMask; // use mask for sizing
+  const w = Math.round(height * aspect);
+  const h = height;
+ 
+  const cv  = document.createElement('canvas');
+  cv.width  = w; cv.height = h;
+  const ctx = cv.getContext('2d');
+ 
+  // Draw colour background (gradient)
+  ctx.drawImage(bgImg, 0, 0, w, h);
+  // Clip to mask shape
+  ctx.globalCompositeOperation = 'destination-in';
+  ctx.drawImage(maskImg, 0, 0, w, h);
+  ctx.globalCompositeOperation = 'source-over';
+  return cv;
+}
+ 
+/* ─────────────────────────────────────────────
+   MAIN GENERATE
+───────────────────────────────────────────── */
+const generateBtn    = document.getElementById('generateBtn');
+const textInput      = document.getElementById('textInput');
+const outputCanvas   = document.getElementById('outputCanvas');
+const placeholderMsg = document.getElementById('placeholderMsg');
+const loaderEl       = document.getElementById('loader');
+const actionRow      = document.getElementById('actionRow');
+const charWarn       = document.getElementById('charWarn');
+ 
+generateBtn.addEventListener('click', generate);
+textInput.addEventListener('keydown', e=>{ if(e.key==='Enter') generate(); });
+ 
+async function generate(){
+  const raw = textInput.value.trim();
+  if(!raw) return;
+ 
+  // Filter to supported chars (A-Z only; spaces get a gap)
+  const chars = raw.toUpperCase().split('');
+  const supported = chars.filter(c => c===' ' || LETTERS.includes(c));
+  const skipped   = [...new Set(chars.filter(c => c!==' ' && !LETTERS.includes(c)))];
+ 
+  charWarn.textContent = skipped.length
+    ? `⚠ Unsupported characters skipped: ${skipped.join(' ')}`
+    : '';
+ 
+  if(!supported.length || supported.every(c=>c===' ')){
+    charWarn.textContent = '⚠ No supported letters found. Only A–Z are supported.';
+    return;
+  }
+ 
+  // Show loader
+  placeholderMsg.style.display = 'none';
+  outputCanvas.style.display   = 'none';
+  loaderEl.classList.add('active');
+  actionRow.style.display      = 'none';
+  generateBtn.disabled = true;
+ 
+  const letterH = parseInt(document.getElementById('sizeRange').value);
+  const gap     = parseInt(document.getElementById('gapRange').value);
+  const shadowB = parseInt(document.getElementById('shadowRange').value);
+ 
+  try {
+    // Preload letter canvases
+    const letterPromises = supported.map(c =>
+      c === ' ' ? Promise.resolve(null) : renderLetter(c, letterH)
+    );
+    const letterCanvases = await Promise.all(letterPromises);
+ 
+    const spaceW = Math.round(letterH * 0.35);
+    const pad    = shadowB + 4;
+    const totalW = letterCanvases.reduce((sum, cv) =>
+      sum + (cv ? cv.width : spaceW) + gap, -gap) + pad*2;
+    const totalH = letterH + pad*2;
+ 
+    outputCanvas.width  = totalW;
+    outputCanvas.height = totalH;
+    const ctx = outputCanvas.getContext('2d');
+ 
+    // ── background ──
+    const bgMode = document.getElementById('bgSelect').value;
+    if(bgMode === 'color'){
+      ctx.fillStyle = document.getElementById('bgColor').value;
+      ctx.fillRect(0,0,totalW,totalH);
+    } else if(bgMode === 'artwork'){
+      const artSrc = document.getElementById('artSelect').value;
+      try {
+        const artImg = await loadImg(artSrc);
+        // cover-fit
+        const scaleX = totalW / artImg.naturalWidth;
+        const scaleY = totalH / artImg.naturalHeight;
+        const scale  = Math.max(scaleX, scaleY);
+        const dw = artImg.naturalWidth  * scale;
+        const dh = artImg.naturalHeight * scale;
+        const dx = (totalW - dw) / 2;
+        const dy = (totalH - dh) / 2;
+        ctx.drawImage(artImg, dx, dy, dw, dh);
+      } catch(e){ /* fallback transparent */ }
+    }
+ 
+    // ── shadow pass ──
+    if(shadowB > 0){
+      ctx.save();
+      ctx.filter = `blur(${shadowB}px)`;
+      ctx.globalAlpha = 0.55;
+      let x = pad;
+      for(const cv of letterCanvases){
+        if(!cv){ x += spaceW + gap; continue; }
+        ctx.drawImage(cv, x + shadowB*0.4, pad + shadowB*0.6);
+        x += cv.width + gap;
+      }
+      ctx.restore();
+    }
+ 
+    // ── letter pass ──
+    let x = pad;
+    for(const cv of letterCanvases){
+      if(!cv){ x += spaceW + gap; continue; }
+      ctx.drawImage(cv, x, pad);
+      x += cv.width + gap;
+    }
+ 
+    outputCanvas.style.display = 'block';
+    actionRow.style.display    = 'flex';
+  } catch(err){
+    placeholderMsg.textContent = '⚠ Error loading assets. Check console.';
+    placeholderMsg.style.display = 'block';
+    console.error(err);
+  } finally {
+    loaderEl.classList.remove('active');
+    generateBtn.disabled = false;
+  }
+}
+ 
+/* ─────────────────────────────────────────────
+   DOWNLOAD & COPY
+───────────────────────────────────────────── */
+document.getElementById('dlBtn').addEventListener('click', ()=>{
+  const text = textInput.value.trim().replace(/[^a-z0-9]/gi,'_') || 'gta6_text';
+  const a = document.createElement('a');
+  a.download = `${text}.png`;
+  a.href = outputCanvas.toDataURL('image/png');
+  a.click();
+});
+ 
+document.getElementById('copyBtn').addEventListener('click', async ()=>{
+  try {
+    outputCanvas.toBlob(async blob=>{
+      await navigator.clipboard.write([
+        new ClipboardItem({'image/png': blob})
+      ]);
+      const btn = document.getElementById('copyBtn');
+      const orig = btn.textContent;
+      btn.textContent = '✓ Copied!';
+      setTimeout(()=>btn.textContent=orig, 2000);
+    });
+  } catch(e){
+    alert('Copy failed – try downloading instead.');
+  }
+});
+</script>
+</body>
+</html>
+ 
